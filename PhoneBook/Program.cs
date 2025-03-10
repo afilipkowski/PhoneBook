@@ -1,2 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using PhoneBook.Models;
+
+var db = new ContactsContext();
+db.Add(new Contact { });
+db.SaveChanges();
