@@ -1,5 +1,7 @@
-﻿using PhoneBook.Models;
+﻿using PhoneBook;
+using PhoneBook.Models;
 
 var db = new ContactsContext();
-db.Add(new Contact { });
-db.SaveChanges();
+var ui = new UserInterface();
+
+ui.DisplayInterface();
