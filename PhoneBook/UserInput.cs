@@ -1,4 +1,6 @@
-﻿namespace PhoneBook;
+﻿using System.Text.RegularExpressions;
+
+namespace PhoneBook;
 
 internal static class UserInput
 {
@@ -20,6 +22,20 @@ internal static class UserInput
         {
             Console.WriteLine("Invalid option. Please try again.");
             input = GetInt("Select the option: ");
+        }
+        return input;
+    }
+
+    internal static string ValidateInput(bool email=false)
+    {
+        string input;
+        string pattern = email ? @"^\S+@\S+\.\S+$" : @"^\d{3}-\d{3}-\d{3}$";
+
+        input = Console.ReadLine();
+        while (!Regex.Match(input, pattern).Success)
+        {
+            Console.Write("Incorrect input. Enter the data in correct format: ");
+            input = Console.ReadLine();
         }
         return input;
     }
