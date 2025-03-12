@@ -32,12 +32,16 @@ internal class ContactController
     {
         ContactsContext contactsContext = new();
 
-        int id = UserInput.GetInt("Enter ID of the contact you want to delete: ");
+        int id = UserInput.GetInt("\nEnter ID of the contact you want to delete or enter 0 to return: ");
+        if (id == 0) return;
         var contact = contactsContext.Contacts.Find(id);
         if (contact != null)
         {
             contactsContext.Remove(contact);
             contactsContext.SaveChanges();
+            Console.WriteLine("Contact deleted succesfully. Press any key to continue...");
+            Console.ReadLine();
+            Console.Clear();
         }
         else
             Console.WriteLine("Contact not found!");
@@ -54,23 +58,23 @@ internal class ContactController
     {
         ContactsContext contactsContext = new();
 
-        int id = UserInput.GetInt("Enter ID of the contact you want to update: ");
+        int id = UserInput.GetInt("\nEnter ID of the contact you want to update or enter 0 to return: ");
+        if (id == 0) return;
         var contact = contactsContext.Contacts.Find(id);
         if (contact != null)
         {
-            Console.WriteLine("Insert new name (or leave it blank if you don't want to change the name): ");
+            Console.Write("Insert new name (or leave it blank if you don't want to change the name): ");
             string name = Console.ReadLine();
             if (name != "") contact.Name = name;
 
-            Console.WriteLine("Insert new phone number (or leave it blank if you don't want to change the phone number): ");
+            Console.Write("Insert new phone number (or leave it blank if you don't want to change the phone number): ");
             string phoneNumber = UserInput.ValidateInput(email: false, update: true);
             if (phoneNumber != "") contact.PhoneNumber = phoneNumber;
 
-            Console.WriteLine("Insert new email address (or leave it blank if you don't want to change the email address): ");
+            Console.Write("Insert new email address (or leave it blank if you don't want to change the email address): ");
             string email = UserInput.ValidateInput(email: true, update: true);
             if (email != "") contact.Email = email;
 
-            contactsContext.Add(contact);
             contactsContext.SaveChanges();
             Console.WriteLine("Contact updated succesfully. Press any key to continue...");
             Console.ReadLine();
