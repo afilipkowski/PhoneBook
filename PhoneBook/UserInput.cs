@@ -26,12 +26,14 @@ internal static class UserInput
         return input;
     }
 
-    internal static string ValidateInput(bool email=false)
+    internal static string ValidateInput(bool email=false, bool update=false)
     {
         string input;
         string pattern = email ? @"^\S+@\S+\.\S+$" : @"^\d{3}-\d{3}-\d{3}$";
 
         input = Console.ReadLine();
+        if (update && input == "")
+            return input;
         while (!Regex.Match(input, pattern).Success)
         {
             Console.Write("Incorrect input. Enter the data in correct format: ");

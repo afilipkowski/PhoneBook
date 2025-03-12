@@ -1,4 +1,7 @@
-﻿namespace PhoneBook;
+﻿using Microsoft.IdentityModel.Tokens;
+using PhoneBook.Models;
+
+namespace PhoneBook;
 
 internal class UserInterface
 {
@@ -20,17 +23,33 @@ internal class UserInterface
                 _contactController.AddContact();
                 break;
             case 2:
-                _contactController.GetContacts();
+                DisplayContacts(_contactController.GetContacts());
                 break;
             case 3:
                 _contactController.UpdateContact();
                 break;
             case 4:
+                DisplayContacts(_contactController.GetContacts());
                 _contactController.DeleteContact();
                 break;
             case 5:
                 Environment.Exit(0);
                 break;
+        }
+    }
+
+    internal void DisplayContacts(List<Contact> contacts)
+    {
+        if (contacts.IsNullOrEmpty())
+        {
+            Console.WriteLine("No contacts found!");
+        }
+        else
+        {
+            foreach (var contact in contacts)
+            {
+                Console.WriteLine($"Id: {contact.Id}, Name: {contact.Name}, Phone Number: {contact.PhoneNumber}, E-mail: {contact.Email}");
+            }
         }
     }
 }

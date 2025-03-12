@@ -1,4 +1,6 @@
-﻿namespace PhoneBook.Models;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace PhoneBook.Models;
 
 internal class Contact
 {
